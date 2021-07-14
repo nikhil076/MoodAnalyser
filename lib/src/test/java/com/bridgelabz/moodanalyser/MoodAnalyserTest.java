@@ -3,8 +3,6 @@ import org.hamcrest.CoreMatchers;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.bridgelabz.moodanalyser.MoodAnalyser;
-
 public class MoodAnalyserTest {
 
 	@Test
@@ -14,4 +12,12 @@ public class MoodAnalyserTest {
         String mood = moodAnalyser.analyseMood("This is a sad message");
         Assert.assertThat(mood, CoreMatchers.is("SAD"));
     }
+	@Test
+	public void ifTestMessageIsNotSad_shouldReturnHappy()
+	{
+		MoodAnalyser analyser = new MoodAnalyser();
+		String mood = analyser.analyseMood("This is any Messaage");
+		Assert.assertThat(mood, CoreMatchers.is("HAPPY"));
+	}
 }
+
