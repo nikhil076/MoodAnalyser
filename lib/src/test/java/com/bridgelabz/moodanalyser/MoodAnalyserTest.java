@@ -13,4 +13,12 @@ public class MoodAnalyserTest {
         String mood = moodAnalyser.analyseMood("This is a sad message");
         Assert.assertThat(mood, CoreMatchers.is("SAD"));
     }
+	
+	@Test
+	public void ifTestMessageIsNotSad_shouldReturnHappy()
+	{
+		MoodAnalyser analyser = new MoodAnalyser();
+		String mood = analyser.analyseMood("This is any Messaage");
+		Assert.assertThat(mood, CoreMatchers.is("HAPPY"));
+	}
 }
