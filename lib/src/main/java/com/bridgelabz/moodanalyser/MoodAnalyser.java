@@ -15,12 +15,12 @@ public class MoodAnalyser
 		this.message = message;
 	}
 
-	public String analyseMood(String message)
+	public String analyseMood(String message) throws MoodAnalyserException
 	{
 		this.message = message;
 		return analyseMood();
 	}
-	public String analyseMood()
+	public String analyseMood() throws MoodAnalyserException
     {
 		try
 		{
@@ -33,8 +33,9 @@ public class MoodAnalyser
 	            return "HAPPY";
 	        }
 		}
-		catch (NullPointerException e) {
-			return "HAPPY";
+		catch (NullPointerException e) 
+		{
+			throw new MoodAnalyserException("Please enter proper message");
 		}
     }
 }
