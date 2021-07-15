@@ -28,14 +28,15 @@ public class MoodAnalyser
 	        {
 	            return "SAD";
 	        }
-	        else
+	        else if (message.isEmpty())
 	        {
-	            return "HAPPY";
+	            throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_EMPTY, "Empty string passed");
 	        }
+	        return "HAPPY";
 		}
 		catch (NullPointerException e) 
 		{
-			throw new MoodAnalyserException("Please enter proper message");
+			throw new MoodAnalyserException(MoodAnalyserException.ExceptionType.ENTERED_NULL,"Please enter proper message");
 		}
     }
 }

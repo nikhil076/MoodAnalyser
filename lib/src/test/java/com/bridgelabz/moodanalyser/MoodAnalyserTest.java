@@ -23,16 +23,15 @@ public class MoodAnalyserTest
 			mood = analyser.analyseMood("This is any Messaage");
 			Assert.assertThat(mood, CoreMatchers.is("HAPPY"));
 		} catch (MoodAnalyserException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 	
 	@Test
-	public void ifMessageIsNull_ShoulReturnHappy()
+	public void ifMessageIsNull_ShouldThroughCustomExceptionForNull()
 	{
 		
-		MoodAnalyser analyser = new MoodAnalyser();
+		MoodAnalyser analyser = new MoodAnalyser(null);
 		String mood;
 		try {
 			ExpectedException exception = ExpectedException.none();
@@ -41,7 +40,23 @@ public class MoodAnalyserTest
 			
 		} catch (MoodAnalyserException e) 
 		{
-			Assert.assertEquals("Please enter proper message", e.getMessage() );
+			Assert.assertEquals(MoodAnalyserException.ExceptionType.ENTERED_NULL, e.type);
+		}
+	}
+	
+	@Test
+	public void ifEmptyMessage_ShouldThroughCustomExceptionForEmpty()
+	{
+		MoodAnalyser analyser = new MoodAnalyser("");
+		String mood;
+		try 
+		{
+			ExpectedException exception = ExpectedException.none();
+			exception.expect(MoodAnalyserException.class);
+			mood=analyser.analyseMood();
+		}
+		catch (MoodAnalyserException e) {
+			Assert.assertEquals(MoodAnalyserException.ExceptionType.ENTERED_EMPTY, e.type);
 		}
 	}
 }
